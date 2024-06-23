@@ -70,6 +70,21 @@ GROUP BY
 ORDER BY
     age_range;
 
-
+SELECT
+    CASE
+        WHEN DATEDIFF(CURDATE(),birthdate) BETWEEN 0 AND 20 THEN '0-20'
+        WHEN DATEDIFF(CURDATE(),birthdate) BETWEEN 21 AND 30 THEN '21-30'
+        WHEN DATEDIFF(CURDATE(),birthdate) BETWEEN 31 AND 40 THEN '31-40'
+        WHEN DATEDIFF(CURDATE(),birthdate) BETWEEN 41 AND 50 THEN '41-50'
+        WHEN DATEDIFF(CURDATE(),birthdate) BETWEEN 51 AND 60 THEN '51-60'
+        ELSE 'Over 60'
+    END AS age_range,
+    COUNT(employee_id) AS count_of_employees
+FROM
+    `human resource`
+GROUP BY
+    age_range
+ORDER BY
+    MIN(DATEDIFF(CURDATE(),birthdate));
 
 
